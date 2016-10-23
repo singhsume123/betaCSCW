@@ -1,1 +1,24 @@
-<div>This is the questionsShow view.</div>
+<div class="container" id="question-show-container">
+  <div>
+    <div>
+      <h1>{{question.title}}</h1>
+    </div>
+  </div>
+  <hr/>
+  <pagedown-viewer content="question.content"></pagedown-viewer>
+  &nbsp;
+  <h3>{{question.answers.length}} Answers</h3>
+  <div ng-repeat="answer in question.answers">
+    <hr/>
+    <div class="answer">
+     <pagedown-viewer content="answer.content"></pagedown-viewer>
+    </div>
+  </div>
+  <hr/>
+  <h3>Your answer</h3>
+  <form name="answerForm" ng-submit="submitAnswer()">
+    <pagedown-editor ng-model="newAnswer.content"></pagedown-editor>
+    <input type="submit" class="btn btn-primary" value="Submit your answer">
+  </form>
+  </div>
+</div>
