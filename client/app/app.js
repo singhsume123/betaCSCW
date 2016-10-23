@@ -10,7 +10,8 @@ angular.module('betaApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'validation.match'
+  'validation.match',
+  'ui.pagedown',
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
