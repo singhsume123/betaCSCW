@@ -22,6 +22,10 @@ module.exports = function(config) {
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/angular-validation-match/dist/angular-validation-match.min.js',
+      'client/bower_components/pagedown/Markdown.Converter.js',
+      'client/bower_components/pagedown/Markdown.Sanitizer.js',
+      'client/bower_components/pagedown/Markdown.Extra.js',
+      'client/bower_components/pagedown/Markdown.Editor.js',
       'client/bower_components/angular-pagedown/angular-pagedown.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
       // endbower
