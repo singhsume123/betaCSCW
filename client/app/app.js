@@ -12,6 +12,7 @@ angular.module('betaApp', [
   'ui.bootstrap',
   'validation.match',
   'ui.pagedown',
+  'ngTagsInput',
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
