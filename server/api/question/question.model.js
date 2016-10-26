@@ -8,6 +8,9 @@ var QuestionSchema = new mongoose.Schema({
   answers: [{
     content: String,
   }],
+  tags: [{
+    text: String,
+  }],
 });
 
 export default mongoose.model('Question', QuestionSchema);
