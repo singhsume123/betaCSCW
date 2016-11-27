@@ -1,7 +1,11 @@
 <div class="container" id="question-show-container">
   <div>
     <div>
-      <h1>{{question.title}}</h1>
+      <button ng-if="isOwner(question)" type="button" class="close" ng-click="deleteQuestion()">&times;</button>
+      <h1>
+        <div ng-if="! editing">{{question.title}}</div>
+        <input type=text ng-model="question.title" ng-if=" editing">
+      </h1>
       <span ng-repeat="tag in question.tags">
         <span class="label label-info">
           {{tag.text}}
@@ -10,13 +14,22 @@
     </div>
   </div>
   <hr/>
-  <pagedown-viewer content="question.content"></pagedown-viewer>
+  <pagedown-viewer content="question.content" ng-if="!editing"></pagedown-viewer>
+  <pagedown-editor ng-model="question.content" ng-if=" editing"></pagedown-editor>
+  <button type="submit" class="btn btn-primary" ng-click="editing=false;updateQuestion()" ng-show=" editing">Save</button>
+  <a ng-click="editing=!editing;" ng-show="isOwner(question) && !editing">Edit</a>
+  <div class="text-right">by {{question.user.name}} · {{question.createdAt}}</div>
   &nbsp;
   <h3>{{question.answers.length}} Answers</h3>
   <div ng-repeat="answer in question.answers">
     <hr/>
     <div class="answer">
-     <pagedown-viewer content="answer.content"></pagedown-viewer>
+    <button ng-if="isOwner(answer)" type="button" class="close" ng-click="deleteAnswer(answer)">&times;</button>  
+    <pagedown-viewer content="answer.content" ng-if="!editing"></pagedown-viewer>
+    <pagedown-editor ng-model="answer.content" ng-if=" editing"></pagedown-editor>
+    <button type="submit" class="btn btn-primary" ng-click="editing=false;updateAnswer(answer)" ng-show=" editing">Save</button>
+    <a ng-click="editing=!editing;" ng-show="isOwner(answer) && !editing">Edit</a>
+     <div class="text-right">by {{answer.user.name}} · {{answer.createdAt}}</div>
      <div style="display: none;" answerlks contenttxt="{{answer.content}}">
        <b>Video(s):</b>
        <br />
