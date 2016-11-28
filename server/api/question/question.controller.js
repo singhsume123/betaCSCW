@@ -72,7 +72,9 @@ function handleUnauthorized(req, res) {
 
 // Gets a list of Questions
 export function index(req, res) {
-  Question.find().sort({createdAt: -1}).limit(20).execAsync()
+  var query = req.query.query && JSON.parse(req.query.query);
+  console.log(query);
+  Question.find(query).sort({createdAt: -1}).limit(20).execAsync()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -139,3 +141,4 @@ export function updateAnswer(req, res) {
     exports.show(req, res);
   });
 };
+

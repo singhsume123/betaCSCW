@@ -4,8 +4,11 @@ angular.module('betaApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('main', {
-        url: '/',
+        url: '/?keyword',
         templateUrl: 'app/questionsIndex/questionsIndex.html',
-        controller: 'QuestionsIndexCtrl'
+        controller: 'QuestionsIndexCtrl',
+        resolve: {
+          query: function(){return {};}
+        },
       });
   });
