@@ -11,7 +11,7 @@
 
 import _ from 'lodash';
 import Question from './question.model';
-
+import User from "../user/user.model";
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -90,6 +90,18 @@ export function show(req, res) {
 // Creates a new Question in the DB
 export function create(req, res) {
   req.body.user = req.user;
+  
+  var currentPoints = (parseInt(req.body.user.points)+50);
+  if(currentPoints >= 1000) {
+    req.body.user.rating = "Master Yoda";
+  } else if(currentPoints >= 500) {
+    req.body.user.rating = "Everest Conquerer";
+  } else if(currentPoints >= 100) {
+    req.body.user.rating = "Climber";
+  }
+  User.update({_id: req.body.user._id}, {$set: {points: currentPoints.toString(), rating: req.body.user.rating}}, function(err, num) {
+  });
+  
   Question.createAsync(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -100,6 +112,7 @@ export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
+  
   Question.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(handleUnauthorized(req, res))
@@ -119,6 +132,16 @@ export function destroy(req, res) {
 
 export function createAnswer(req, res) {
   req.body.user = req.user;
+  var currentPoints = (parseInt(req.body.user.points)+50);
+  if(currentPoints >= 1000) {
+    req.body.user.rating = "Master Yoda";
+  } else if(currentPoints >= 500) {
+    req.body.user.rating = "Everest Conquerer";
+  } else if(currentPoints >= 100) {
+    req.body.user.rating = "Climber";
+  }
+  User.update({_id: req.body.user._id}, {$set: {points: currentPoints.toString(), rating: req.body.user.rating}}, function(err, num) {
+  });
   Question.update({_id: req.params.id}, {$push: {answers: req.body}}, function(err, num) {
     if(err) { return handleError(res)(err); }
     if(num === 0) { return res.send(404).end(); }
