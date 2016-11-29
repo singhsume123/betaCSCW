@@ -37,6 +37,7 @@ angular.module('betaApp')
       $http.post('/api/questions/' + $stateParams.id + '/answers', $scope.newAnswer).success(function(){
         loadQuestions();
         $scope.newAnswer = {};
+        window.location.href=window.location.href;
       });
     };
   })

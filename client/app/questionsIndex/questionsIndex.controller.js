@@ -9,5 +9,7 @@ angular.module('betaApp')
     console.log(query);
     $http.get('/api/questions', {params: {query: query}}).success(function(questions) {
       $scope.questions = questions;
+      //$route.reload();
     });
+   // $route.reload();
 });
