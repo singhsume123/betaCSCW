@@ -10,4 +10,4 @@ angular.module('betaApp')
     $http.get('/api/questions', {params: {query: query}}).success(function(questions) {
       $scope.questions = questions;
     });
-  });
+});
